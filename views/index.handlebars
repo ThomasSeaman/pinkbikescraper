@@ -1,0 +1,56 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Pinkbike Scraper</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active">
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/all">Saved Articles</a>
+            </li>
+            <li>
+                <a href="/" class="btn btn-danger scrape-new">SCRAPE NEW ARTICLES!</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="jumbotron text-center">
+    <div class="overlay">
+    </div>
+    <div class="background-image">
+    </div>
+    <div class="caption">
+        <h1>Pinkbike Scraper</h1>
+        <p>Your daily dose of what's new in the mountain biking world</p>
+    </div>
+</div>
+
+
+{{#each article}}
+
+<div class="container-fluid article-container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>
+                <a class="article-link" target="_blank" href={{link}}>
+                    {{title}}
+                    <a class="btn btn-success save" data-value={{_id}}>
+                        Save Article
+                    </a>
+                </a>
+            </h3>
+        </div>
+    </div>
+</div>
+
+{{/each}}
+
+
+
+<footer class="footer">
+    <div class="container">
+        <p>Pinkbike Mongo Scraper</p>
+    </div>
+</footer>

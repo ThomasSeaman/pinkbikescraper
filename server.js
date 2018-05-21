@@ -13,6 +13,7 @@ var bodyParser = require("body-parser");
 // Require request and cheerio. This makes the scraping possible
 var request = require("request");
 var cheerio = require("cheerio");
+
 // Port
 var PORT = 3000;
 // Initialize Express
@@ -28,17 +29,11 @@ app.use(express.static("public"));
 var databaseUrl = "pinkbikedb";
 var collections = ["pinkbikeData"];
 
-// practice grabbing data from Pinkbike.com
-// request('https://www.pinkbike.com/', function(err,res,html){
-//     if (err) throw err
-//     var $ = cheerio.load(html)
-//     $('.f22').each(function (i, element){
+// handlebars
+var exphbs = require("express-handlebars");
 
-//         console.log($(element).text().trim())
-//         console.log($(element).attr("href"))
-//     })
-
-// })
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 // Hook mongojs configuration to the db variable
 var db = mongojs(databaseUrl, collections);
@@ -49,7 +44,13 @@ db.on("error", function (error) {
 
 // Main route
 app.get("/", function (req, res) {
-    res.send(index.html);
+    db.pinkbikeData.find({}, function (error,data){
+        if (error) throw error
+        var hbsObj = {
+            article: data
+        }
+        res.render("index", hbsObj)
+    })
 });
 
 // Retrieve data from the db
