@@ -15,7 +15,7 @@ var request = require("request");
 var cheerio = require("cheerio");
 
 // Port
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 // Initialize Express
 var app = express();
 // Setup the app with body-parser and a static folder
@@ -103,7 +103,6 @@ app.get("/scrape", function (req, res) {
     // Send a "Scrape Complete" message to the browser
     res.send("Scrape Complete");
 });
-
 app.listen(PORT, function () {
-    console.log("App running on port " + PORT + "!");
-});
+    console.log("App now listening at localhost:" + PORT);
+  });
