@@ -15,7 +15,7 @@ var request = require("request");
 var cheerio = require("cheerio");
 
 // Port
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 // Initialize Express
 var app = express();
 // Setup the app with body-parser and a static folder
