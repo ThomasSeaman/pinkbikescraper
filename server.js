@@ -14,7 +14,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/pinkbikedb";
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
-// mongoose.connect("mongodb://localhost/pinkbike");
+
 // Port
 var PORT = process.env.PORT || 3000;
 // Initialize Express
@@ -93,7 +93,6 @@ app.get("/scrape", function (req, res) {
             // If this found element had both a title and a link
             if (title && link) {
 
-                
                 // Insert the data in the pinkbikeData db
                 db.pinkbikeData.insert({
                     title: title,
@@ -108,13 +107,14 @@ app.get("/scrape", function (req, res) {
                             // Otherwise, log the inserted data
                             console.log(inserted);
                         }
-                    });
-            }
-        });
+                    })
+                }
+            
     });
+})
     // Send a "Scrape Complete" message to the browser
     res.send("Scrape Complete");
 });
 app.listen(PORT, function () {
     console.log("App now listening at localhost:" + PORT);
-  });
+  })
