@@ -8,13 +8,13 @@ var cheerio = require("cheerio");
 var mongoose = require('mongoose');
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/pinkbikedb";
 
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
-
+// mongoose.connect("mongodb://localhost/pinkbike");
 // Port
 var PORT = process.env.PORT || 3000;
 // Initialize Express
@@ -38,6 +38,15 @@ app.set("view engine", "handlebars");
 
 // Hook mongojs configuration to the db variable
 var db = mongojs(databaseUrl, collections);
+
+// var mongodb = require('mongodb')
+// var mongojs = require('mongojs')
+ 
+// mongodb.Db.connect('mongodb://thomas:thomas@ds129670.mlab.com:29670/heroku_l1qkbqch', function (err, theDb) {
+//     var db = mongojs(theDb, collections)
+// })
+// var db = mongojs(heroku_l1qkbqch:<dbpassword>@ds129670.mlab.com:29670/heroku_l1qkbqch, [collections]);
+
 // Log any mongojs errors to console
 db.on("error", function (error) {
     console.log("Database Error:", error);
@@ -83,6 +92,8 @@ app.get("/scrape", function (req, res) {
             var link = $(element).attr("href");
             // If this found element had both a title and a link
             if (title && link) {
+
+                
                 // Insert the data in the pinkbikeData db
                 db.pinkbikeData.insert({
                     title: title,
