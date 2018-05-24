@@ -16,7 +16,7 @@ mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
 
 // Port
-var PORT = process.env.PORT || 3000;
+var PORT = 3000;
 // Initialize Express
 var app = express();
 // Setup the app with body-parser and a static folder
