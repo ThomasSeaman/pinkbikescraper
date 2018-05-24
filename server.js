@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 
 
 
-
+// Port
 var PORT = process.env.PORT || 3000
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/pinkbikedb";
@@ -19,7 +19,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/pinkbikedb";
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
 
-// Port
+
 
 // Initialize Express
 var app = express();
