@@ -19,9 +19,7 @@
 
 ## Dependencies
 
-express
-mongojs
-bodyParser
+express, mongojs, bodyParser
 request
 axios
 cheerio
