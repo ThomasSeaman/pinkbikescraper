@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ThomasSeaman/pinkbikescraper#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.3",
@@ -26,6 +27,7 @@
     "mongodb": "^3.1.0-beta4",
     "mongojs": "^2.5.0",
     "mongoose": "^5.1.2",
+    "path": "^0.12.7",
     "request": "^2.86.0"
   }
 }

@@ -8,10 +8,10 @@
                 <a href="/">Home</a>
             </li>
             <li>
-                <a href="/all">Saved Articles</a>
+                <a href="/articles">Saved Articles</a>
             </li>
             <li>
-                <a href="/" class="btn btn-danger scrape-new">SCRAPE NEW ARTICLES!</a>
+                <a href="/scrape" onclick="alert('Scrape Updated!');"class="btn btn-danger scrape-new">SCRAPE NEW ARTICLES!</a>
             </li>
         </ul>
     </div>
@@ -28,7 +28,7 @@
 </div>
 
 
-{{#each article}}
+{{#each articles}}
 
 <div class="container-fluid article-container">
     <div class="panel panel-default">
