@@ -21,52 +21,34 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-
-
 var db = require("./models");
 
-
-
-// Database configuration
-// var databaseUrl = "pinkbikedb";
-// var collections = ["pinkbikeData"];
-mongoose.connect("mongodb://localhost/pinkbikedb");
-// handlebars
 var exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// Hook mongojs configuration to the db variable
-// var db = mongojs(databaseUrl, collections);
+mongoose.connect("mongodb://localhost/pinkbikedb");
 
-// var mongodb = require('mongodb')
-// var mongojs = require('mongojs')
-
-// mongodb.Db.connect('mongodb://thomas:thomas@ds129670.mlab.com:29670/heroku_l1qkbqch', function (err, theDb) {
-//     var db = mongojs(theDb, collections)
-// })
-// var db = mongojs(heroku_l1qkbqch:<dbpassword>@ds129670.mlab.com:29670/heroku_l1qkbqch, [collections]);
-
-// Log any mongojs errors to console
-// db.on("error", function (error) {
-//     console.log("Database Error:", error);
+// Main route - This is broken, struggling to tie into my database correctly with mongoose in order to get Heroku hosting to work.
+// app.get("/", function (req, res) {
+//     db.articles.find({}, function (error, data) {
+//         if (error) throw error
+//         var hbsObj = {
+//             Article: data
+//         }
+//         res.render("index", hbsObj)
+//     })
 // });
 
-// Main route
+
 app.get("/", function (req, res) {
     res.render(path.join(__dirname, './views/index.handlebars'));
 });
-
-// app.get("/", function (req, res) {
-//     res.render(path.join(__dirname, './views/index.handlebars'));
-// });
 app.get("/index", function (req, res) {
     res.render(path.join(__dirname, "./views/index.handlebars"));
 });
 
-
-// A GET route for scraping the echoJS website
 app.get("/scrape", function (req, res) {
     // First, we grab the body of the html with request
     axios.get("https://www.pinkbike.com/").then(function (response) {
@@ -97,33 +79,6 @@ app.get("/scrape", function (req, res) {
         res.redirect("/index");
     });
 });
-
-
-// // Main route
-// app.get("/", function (req, res) {
-//     db.Articles.find({}, function (error, data) {
-//         if (error) throw error
-//         var hbsObj = {
-//             articles: data
-//         }
-//         res.render("index", hbsObj)
-//     })
-// });
-
-// // Retrieve data from the db
-// app.get("/articles", function (req, res) {
-//     // Find all results from the scrapedData collection in the db
-//     db.pinkbikeData.find({}, function (error, found) {
-//         // Throw any errors to the console
-//         if (error) {
-//             console.log(error);
-//         }
-//         // If there are no errors, send the data to the browser as json
-//         else {
-//             res.json(found);
-//         }
-//     });
-// });
 
 // Route for getting all Articles from the db
 app.get("/articles", function (req, res) {
